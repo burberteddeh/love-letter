@@ -1,6 +1,7 @@
 const canvas = document.getElementById("sky");
 const ctx = canvas.getContext("2d");
-
+const music = document.getElementById("bgMusic");
+let musicStarted = false;
 const message = document.getElementById("message");
 const button = document.getElementById("continueBtn");
 
@@ -66,7 +67,7 @@ animate();
 
 const pages=[
 
-"Hi, Jhoanna.",
+"Hi, babyy.",
 
 "I made something for you.",
 
@@ -126,6 +127,110 @@ setTimeout(nextPage,1500);
 
 button.onclick=()=>{
 
-alert("Part 2: Heart animation is coming next ❤️");
+    music.volume = 0.5;
+
+    music.play()
+    .then(()=>{
+        musicStarted = true;
+    })
+    .catch(()=>{
+        console.log("Browser blocked autoplay");
+    });
+
+
+    // hide button
+    button.classList.add("hidden");
+
+
+    // show heart
+    const heart=document.getElementById("heart");
+
+    heart.classList.remove("hidden");
+
+
+    // after heart animation, show letter
+    setTimeout(()=>{
+
+        heart.classList.add("hidden");
+
+        message.style.opacity="0";
+
+        document.getElementById("letter").classList.remove("hidden");
+
+        typeLetter();
+
+        createHearts();
+
+    },3000);
 
 };
+
+const letterMessage = 
+`
+To my special person,
+
+I just wanted to make something that shows how much I appreciate you.
+
+Thank you for the laughs, the conversations, and the memories we have created.
+
+You are someone who made my days brighter just by being there.
+
+I hope you always remember how special and wonderful you are.
+
+No matter what happens, I am grateful that I got to know you.
+
+Thank you for being you. YOU ARE MY SPECIAL PERSON.
+
+WITH LOVE, APPRECIATION, I LOVE YOU POO 🤍 HASHSAHHA EME LANGS BA?
+`;
+
+
+function typeLetter(){
+
+const text=document.getElementById("letterText");
+
+let i=0;
+
+text.innerHTML="";
+
+
+let timer=setInterval(()=>{
+
+text.innerHTML+=letterMessage[i];
+
+i++;
+
+
+if(i>=letterMessage.length){
+
+clearInterval(timer);
+
+}
+
+},50);
+
+}
+
+
+
+function createHearts(){
+
+for(let i=0;i<20;i++){
+
+let heart=document.createElement("div");
+
+heart.innerHTML="❤️";
+
+heart.className="floatingHeart";
+
+heart.style.left=Math.random()*100+"vw";
+
+heart.style.animationDelay=Math.random()*5+"s";
+
+
+document.body.appendChild(heart);
+
+
+}
+
+}

@@ -53,6 +53,10 @@ max-width:900px;
 
 line-height:1.5;
 
+opacity:1;
+
+transition:opacity 1.5s ease;
+
 text-shadow:
 
 0 0 15px white,
@@ -90,5 +94,192 @@ transform:scale(1.1);
 .hidden{
 
 display:none;
+
+}
+
+#heart{
+
+font-size:120px;
+
+animation:heartbeat 1.2s infinite;
+
+text-shadow:
+0 0 20px pink,
+0 0 50px red;
+
+}
+
+
+@keyframes heartbeat{
+
+0%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.25);
+}
+
+100%{
+transform:scale(1);
+}
+
+}
+
+
+#letter{
+
+max-width:800px;
+
+font-size:25px;
+
+line-height:1.8;
+
+animation:fadeIn 2s ease;
+
+}
+
+
+#letter p{
+
+margin-top:25px;
+
+}
+
+.paper{
+
+background:rgba(255,255,255,0.08);
+
+backdrop-filter:blur(10px);
+
+padding:40px;
+
+border-radius:20px;
+
+max-width:700px;
+
+box-shadow:
+0 0 30px rgba(255,255,255,.2);
+
+animation:paperAppear 2s ease;
+
+}
+
+
+.paper h1{
+
+font-size:40px;
+
+margin-bottom:30px;
+
+}
+
+
+#letterText{
+
+font-size:24px;
+
+line-height:1.8;
+
+}
+
+
+@keyframes paperAppear{
+
+from{
+
+opacity:0;
+
+transform:translateY(40px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+
+/* Floating hearts */
+
+.floatingHeart{
+
+position:absolute;
+
+font-size:30px;
+
+animation:floatUp 5s linear infinite;
+
+}
+
+
+@keyframes floatUp{
+
+from{
+
+transform:translateY(100vh);
+
+opacity:1;
+
+}
+
+to{
+
+transform:translateY(-100vh);
+
+opacity:0;
+
+}
+
+}
+
+@media(max-width:600px){
+
+#message{
+
+font-size:32px;
+
+}
+
+
+#heart{
+
+font-size:90px;
+
+}
+
+
+.paper{
+
+padding:25px;
+
+}
+
+
+.paper h1{
+
+font-size:30px;
+
+}
+
+
+#letterText{
+
+font-size:18px;
+
+}
+
+button{
+
+font-size:18px;
+
+padding:12px 25px;
+
+}
 
 }
