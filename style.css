@@ -1,6 +1,6 @@
-/* ========================================= */
-/* RESET */
-/* ========================================= */
+/* ==============================
+   RESET
+============================== */
 
 *{
     margin:0;
@@ -8,50 +8,49 @@
     box-sizing:border-box;
 }
 
-html{
-    scroll-behavior:smooth;
-}
-
+html,
 body{
 
-    background:#020612;
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
+
+    font-family:
+    "Poppins",
+    sans-serif;
+
+    background:#040714;
 
     color:white;
 
-    overflow-x:hidden;
-
-    font-family:
-    "Georgia",
-    serif;
-
 }
 
-/* ========================================= */
-/* SKY */
-/* ========================================= */
+/* ==============================
+   STAR BACKGROUND
+============================== */
 
-canvas{
+#sky{
 
     position:fixed;
 
     inset:0;
 
-    z-index:-5;
+    width:100%;
+    height:100%;
+
+    z-index:-2;
 
 }
 
-/* ========================================= */
-/* MAIN SCENE */
-/* ========================================= */
+/* ==============================
+   PAGE
+============================== */
 
-#scene,
-#heartScene,
-#letter,
-#lastLetter{
-
-    min-height:100vh;
+section{
 
     width:100%;
+    height:100vh;
 
     display:flex;
 
@@ -61,83 +60,84 @@ canvas{
 
     align-items:center;
 
-    padding:40px;
-
     text-align:center;
 
-}
-
-/* ========================================= */
-/* TYPEWRITER */
-/* ========================================= */
-
-#message{
-
-    max-width:900px;
-
-    font-size:52px;
-
-    line-height:1.5;
-
-    text-shadow:
-
-        0 0 12px white,
-
-        0 0 35px rgba(255,255,255,.45);
-
-    transition:1.2s;
+    padding:30px;
 
 }
 
-/* ========================================= */
-/* BUTTONS */
-/* ========================================= */
+/* ==============================
+   TITLE
+============================== */
+
+h1{
+
+    font-size:3rem;
+
+    margin-bottom:20px;
+
+    font-weight:700;
+
+}
+
+p{
+
+    font-size:1.15rem;
+
+    line-height:1.8;
+
+    max-width:700px;
+
+    opacity:.9;
+
+}
+
+/* ==============================
+   BUTTON
+============================== */
 
 button{
 
-    margin-top:60px;
+    margin-top:45px;
 
-    padding:15px 35px;
+    padding:
+
+    14px
+    35px;
 
     border:none;
 
-    border-radius:50px;
-
-    cursor:pointer;
-
-    font-size:20px;
+    border-radius:999px;
 
     background:white;
 
-    color:black;
+    color:#111;
 
-    transition:.35s;
+    cursor:pointer;
 
-    box-shadow:
+    font-size:1rem;
 
-        0 0 25px rgba(255,255,255,.25);
+    transition:.3s;
 
 }
 
 button:hover{
 
-    transform:
+    transform:translateY(-3px);
 
-        translateY(-3px)
-
-        scale(1.05);
+    transform:scale(1.05);
 
 }
 
 button:active{
 
-    transform:scale(.95);
+    transform:scale(.96);
 
 }
 
-/* ========================================= */
-/* HIDDEN */
-/* ========================================= */
+/* ==============================
+   HIDDEN
+============================== */
 
 .hidden{
 
@@ -145,879 +145,78 @@ button:active{
 
 }
 
-/* ========================================= */
-/* HEART */
-/* ========================================= */
-
-#heart{
-
-    font-size:140px;
-
-    text-shadow:
-
-        0 0 20px pink,
-
-        0 0 60px crimson,
-
-        0 0 120px red;
-
-}
-
-/* ========================================= */
-/* PAPER */
-/* ========================================= */
-
-.paper{
-
-    width:min(800px,92vw);
-
-    padding:50px;
-
-    border-radius:20px;
-
-    background:rgba(255,255,255,.08);
-
-    backdrop-filter:blur(12px);
-
-    border:1px solid rgba(255,255,255,.15);
-
-    box-shadow:
-        0 20px 60px rgba(0,0,0,.35);
-
-    text-align:center;
-
-}
-
-/* ========================================= */
-/* HEADINGS */
-/* ========================================= */
-
-.paper h1{
-
-    font-size:42px;
-
-    margin-bottom:35px;
-
-}
-
-.paper h2{
-
-    margin-top:40px;
-
-    font-size:70px;
-
-}
-
-/* ========================================= */
-/* PARAGRAPHS */
-/* ========================================= */
-
-.paper p{
-
-    margin-top:22px;
-
-    line-height:2;
-
-    font-size:23px;
-
-}
-
-/* ========================================= */
-/* FIRST LETTER */
-/* ========================================= */
-
-#letter{
-
-    animation:
-
-        fadeIn 1.8s ease;
-
-}
-
-#letterText{
-
-    text-align:left;
-
-    white-space:pre-wrap;
-
-    line-height:2;
-
-    font-size:23px;
-
-    min-height:300px;
-
-}
-
-#nextLetter{
-
-    margin-top:50px;
-
-}
-
-/* ========================================= */
-/* SECOND LETTER */
-/* ========================================= */
-
-#lastLetter{
-
-    opacity:0;
-
-    transform:translateY(40px);
-
-    transition:
-
-        opacity 1.5s ease,
-
-        transform 1.5s ease;
-
-}
-
-#lastLetter.show{
-
-    opacity:1;
-
-    transform:translateY(0);
-
-}
-
-.paper.second{
-
-    background:
-
-        rgba(255,255,255,.05);
-
-    backdrop-filter:blur(18px);
-
-    border:
-
-        1px solid rgba(255,255,255,.08);
-
-}
-
-.paper.second h1{
-
-    margin-bottom:45px;
-
-    letter-spacing:2px;
-
-}
-
-#lastLetterText{
-
-    text-align:left;
-
-}
-
-#lastLetterText p{
-
-    opacity:0;
-
-    transform:translateY(20px);
-
-    transition:
-
-        opacity 1s ease,
-
-        transform 1s ease;
-
-}
-
-#lastLetterText p.show{
-
-    opacity:1;
-
-    transform:translateY(0);
-
-}
-
-/* ========================================= */
-/* DIVIDERS */
-/* ========================================= */
-
-hr{
-
-    margin:45px auto;
-
-    width:60%;
-
-    opacity:.25;
-
-}
-
-/* ========================================= */
-/* HEARTS */
-/* ========================================= */
-
-.floatingHeart{
-
-    position:fixed;
-
-    bottom:-50px;
-
-    font-size:30px;
-
-    pointer-events:none;
-
-    animation:
-
-        floatUp linear forwards;
-
-    opacity:.85;
-
-}
-
-/* ========================================= */
-/* FINAL HEART */
-/* ========================================= */
-
-.paper h2{
-
-    animation:
-
-        heartbeat 1.5s infinite;
-
-}
-
-/* ========================================= */
-/* SCROLLBAR */
-/* ========================================= */
-
-::-webkit-scrollbar{
-
-    width:10px;
-
-}
-
-::-webkit-scrollbar-track{
-
-    background:#040916;
-
-}
-
-::-webkit-scrollbar-thumb{
-
-    background:#777;
-
-    border-radius:20px;
-
-}
-
-::-webkit-scrollbar-thumb:hover{
-
-    background:#aaa;
-
-}
-
-/* ========================================= */
-/* PAPER APPEAR */
-/* ========================================= */
-
-@keyframes paperAppear{
-
-    from{
-
-        opacity:0;
-        transform:translateY(60px) scale(.97);
-
-    }
-
-    to{
-
-        opacity:1;
-        transform:translateY(0) scale(1);
-
-    }
-
-}
-
-.paper{
-
-    animation:paperAppear 1.5s ease;
-
-}
-
-/* ========================================= */
-/* HEARTBEAT */
-/* ========================================= */
-
-@keyframes heartbeat{
-
-    0%{
-
-        transform:scale(1);
-
-    }
-
-    25%{
-
-        transform:scale(1.08);
-
-    }
-
-    50%{
-
-        transform:scale(1.18);
-
-    }
-
-    75%{
-
-        transform:scale(1.08);
-
-    }
-
-    100%{
-
-        transform:scale(1);
-
-    }
-
-}
-
-/* ========================================= */
-/* FLOATING HEARTS */
-/* ========================================= */
-
-@keyframes floatUp{
-
-    from{
-
-        transform:
-
-            translateY(0)
-
-            scale(.8);
-
-        opacity:0;
-
-    }
-
-    20%{
-
-        opacity:1;
-
-    }
-
-    80%{
-
-        opacity:.9;
-
-    }
-
-    to{
-
-        transform:
-
-            translateY(-120vh)
-
-            translateX(40px)
-
-            scale(1.4);
-
-        opacity:0;
-
-    }
-
-}
-
-/* ========================================= */
-/* GLOWING PAPER */
-/* ========================================= */
-
-.paper{
-
-    transition:
-
-        transform .4s ease,
-
-        box-shadow .4s ease;
-
-}
-
-.paper:hover{
-
-    transform:translateY(-5px);
-
-    box-shadow:
-
-        0 0 35px rgba(255,255,255,.18),
-
-        0 0 80px rgba(255,255,255,.08);
-
-}
-
-/* ========================================= */
-/* LETTER PARAGRAPH SPACING */
-/* ========================================= */
-
-#letterText,
-#lastLetterText{
-
-    letter-spacing:.3px;
-
-}
-
-#lastLetterText p{
-
-    margin-bottom:18px;
-
-}
-
-/* ========================================= */
-/* NICE SELECTION */
-/* ========================================= */
-
-::selection{
-
-    background:white;
-    color:#111;
-
-}
-
-/* ========================================= */
-/* SMOOTH OPACITY */
-/* ========================================= */
-
-.opacity0{
-
-    opacity:0;
-
-}
-
-.opacity1{
-
-    opacity:1;
-
-}
-
-/* ========================================= */
-/* FINAL POLISH */
-/* ========================================= */
-
-body{
-
-    animation:pageFadeIn 1.5s ease;
-
-}
-
-/* Smooth section transitions */
-
-section{
-
-    transition:
-
-        opacity .8s ease,
-
-        transform .8s ease;
-
-}
-
-/* Beautiful buttons */
-
-button{
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffffff,
-            #dfe8ff
-        );
-
-    color:#111;
-
-    font-weight:bold;
-
-    letter-spacing:1px;
-
-}
-
-button:hover{
-
-    box-shadow:
-
-        0 0 25px rgba(255,255,255,.45),
-
-        0 0 50px rgba(255,255,255,.18);
-
-}
-
-/* Intro title */
-
-#message{
-
-    animation:
-
-        glow 3s ease-in-out infinite;
-
-}
-
-/* Heart breathing */
-
-#heart{
-
-    animation:
-
-        heartbeat 1.5s infinite,
-
-        glowHeart 4s ease-in-out infinite;
-
-}
-
-/* Paper title */
-
-.paper h1{
-
-    text-shadow:
-
-        0 0 12px rgba(255,255,255,.3);
-
-}
-
-/* Glass effect */
-
-.paper{
-
-    border:
-
-        1px solid rgba(255,255,255,.12);
-
-}
-
-/* ========================================= */
-/* GLOW */
-/* ========================================= */
-
-@keyframes glow{
-
-    0%{
-
-        text-shadow:
-
-            0 0 10px white,
-
-            0 0 30px rgba(255,255,255,.25);
-
-    }
-
-    50%{
-
-        text-shadow:
-
-            0 0 25px white,
-
-            0 0 60px rgba(255,255,255,.45);
-
-    }
-
-    100%{
-
-        text-shadow:
-
-            0 0 10px white,
-
-            0 0 30px rgba(255,255,255,.25);
-
-    }
-
-}
-
-/* ========================================= */
-/* HEART GLOW */
-/* ========================================= */
-
-@keyframes glowHeart{
-
-    0%{
-
-        filter:drop-shadow(0 0 12px crimson);
-
-    }
-
-    50%{
-
-        filter:drop-shadow(0 0 40px red);
-
-    }
-
-    100%{
-
-        filter:drop-shadow(0 0 12px crimson);
-
-    }
-
-}
-
-/* ========================================= */
-/* MOBILE */
-/* ========================================= */
+/* ==============================
+   MOBILE
+============================== */
 
 @media(max-width:768px){
 
-    .paper{
+    h1{
 
-        padding:28px;
-
-    }
-
-    .paper h1{
-
-        font-size:32px;
+        font-size:2.2rem;
 
     }
 
-    .paper h2{
+    p{
 
-        font-size:52px;
-
-    }
-
-    .paper p{
-
-        font-size:18px;
-
-        line-height:1.9;
-
-    }
-
-    #message{
-
-        font-size:34px;
-
-    }
-
-    button{
-
-        width:100%;
-
-        max-width:320px;
+        font-size:1rem;
 
     }
 
 }
 
-/* ========================================= */
-/* VERY SMALL PHONES */
-/* ========================================= */
+/* ==============================
+   HEART PAGE
+============================== */
 
-@media(max-width:480px){
+#heartPage{
 
-    #message{
-
-        font-size:28px;
-
-    }
-
-    .paper{
-
-        width:95%;
-
-        padding:22px;
-
-    }
-
-}
-
-/* =========================================
-   MOBILE IMPROVEMENTS
-========================================= */
-
-@media (max-width:768px){
-
-body{
-
-    overflow-x:hidden;
-
-}
-
-.paper{
-
-    width:94%;
-
-    padding:28px;
-
-    border-radius:18px;
-
-}
-
-.paper h1{
-
-    font-size:32px;
-
-}
-
-.paper h2{
-
-    font-size:52px;
-
-}
-
-.paper p{
-
-    font-size:18px;
-
-    line-height:2;
-
-}
-
-#message{
-
-    font-size:30px;
-
-    width:95%;
-
-    line-height:1.6;
-
-}
-
-button{
-
-    width:90%;
-
-    max-width:320px;
-
-    padding:16px;
-
-    font-size:18px;
+    gap:30px;
 
 }
 
 #heart{
 
-    font-size:90px;
+    font-size:170px;
+
+    animation:heartbeat 1.3s infinite;
+
+    filter:
+
+    drop-shadow(0 0 20px crimson);
 
 }
 
-canvas{
+@keyframes heartbeat{
 
-    width:100vw;
+0%{
 
-    height:100vh;
-
-}
+transform:scale(1);
 
 }
 
-/* Small phones */
+20%{
 
-@media (max-width:430px){
-
-.paper{
-
-    padding:22px;
+transform:scale(1.08);
 
 }
 
-.paper h1{
+40%{
 
-    font-size:28px;
-
-}
-
-.paper p{
-
-    font-size:17px;
+transform:scale(1);
 
 }
 
-#message{
+60%{
 
-    font-size:26px;
+transform:scale(1.12);
 
 }
 
-button{
+100%{
 
-    font-size:17px;
+transform:scale(1);
 
 }
 
 }
-
-/* iPhone SE */
-
-@media (max-width:375px){
-
-.paper{
-
-    width:96%;
-
-}
-
-.paper p{
-
-    font-size:16px;
-
-}
-
-#heart{
-
-    font-size:75px;
-
-}
-
-}
-
-/* =========================================
-   PAGE TRANSITIONS
-========================================= */
-
-.fadeIn{
-    animation: fadeIn .6s ease forwards;
-}
-
-.pageFadeOut{
-    animation: fadeOut .45s ease forwards;
-}
-
-@keyframes fadeIn{
-
-    from{
-        opacity:0;
-        transform:translateY(20px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-
-}
-
-@keyframes fadeOut{
-
-    from{
-        opacity:1;
-        transform:translateY(0);
-    }
-
-    to{
-        opacity:0;
-        transform:translateY(-10px);
-    }
-
-}
-
-/* =========================================
-   PAGE LAYOUT
-========================================= */
-
-section{
-
-    width:100%;
-    min-height:100vh;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    padding:40px;
-
-}
-
-.hidden{
-
-    display:none !important;
-
-}  

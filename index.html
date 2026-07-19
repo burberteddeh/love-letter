@@ -4,121 +4,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>For Jhoanna 🤍</title>
+    <title>For You ❤️</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- Stars -->
+    <!-- Animated Star Background -->
     <canvas id="sky"></canvas>
 
-    <!-- Intro -->
-    <section id="scene">
+    <!-- Background Music -->
+    <audio id="music" loop>
+        <source src="assets/piano.mp3" type="audio/mpeg">
+    </audio>
 
-        <h1 id="message"></h1>
+    <!-- =========================
+         INTRO PAGE
+    ========================== -->
 
-        <button id="continueBtn" class="hidden">
-            Continue →
-        </button>
-
-    </section>
-
-    <!-- Heart -->
-    <section id="heartScene" class="hidden">
-
-        <div id="heart">
-            ❤️
-        </div>
-
-    </section>
-
-    <!-- First Letter -->
-    <section id="letter" class="hidden">
+    <section id="intro">
 
         <div class="paper">
 
-            <h1>For You 🤍</h1>
+            <h1>Hi...</h1>
 
-            <p id="letterText"></p>
+            <p>
+                I made something for you.
+            </p>
 
-            <button id="nextLetter" class="hidden">
-                One Last Thing...
+            <button id="introBtn">
+                Continue ❤️
             </button>
 
         </div>
 
     </section>
 
-  <!-- Page 2 -->
-<section id="page2" class="hidden">
+    <!-- =========================
+         HEART PAGE
+    ========================== -->
 
-    <div class="paper">
+    <section id="heartPage" class="hidden">
 
-        <h1>🌙 One Last Thing...</h1>
+        <div class="paper">
 
-        <p>
-            Before you answer...
-            there's something I'd like to ask.
-        </p>
+            <div id="heart">
+                ❤️
+            </div>
 
-        <button id="page2Btn">
-            Continue →
-        </button>
+            <h2>
+                Every heartbeat reminds me of you.
+            </h2>
 
-    </div>
+            <button id="heartBtn">
+                Continue →
+            </button>
 
-</section>
+        </div>
 
-<!-- Page 3 -->
-<section id="page3" class="hidden">
+    </section>
 
-    <div class="paper">
+    <!-- =========================
+         LOVE LETTER
+    ========================== -->
 
-        <h1>Just Be Honest</h1>
+    <section id="letterPage" class="hidden">
 
-        <p>
-            I've been carrying questions that
-            only you can answer.
-        </p>
+        <div class="paper">
 
-        <button id="page3Btn">
-            Continue →
-        </button>
+            <h1>My Love,</h1>
 
-    </div>
+            <p id="letterText"></p>
 
-</section>
+            <button id="letterBtn" class="hidden">
+                Continue →
+            </button>
 
-<!-- Page 4 -->
-<section id="page4" class="hidden">
+        </div>
 
-    <div class="paper">
+    </section>
+    
+ <section id="ending" class="hidden">
 
-        <h1>That's All I Need</h1>
+<div class="paper">
 
-        <p>
-            If your answer is no...
-            I'll accept it.
+<h1>
 
-            I only wanted honesty,
-            because I care about you enough
-            to hear the truth.
-        </p>
+❤️
 
-        <button id="finishBtn">
-            Thank You ❤️
-        </button>
+</h1>
 
-    </div>
+<h2>
 
-</section>
+Thank You.
 
-    <audio id="bgMusic" loop>
-        <source src="assets/piano.mp3" type="audio/mpeg">
-    </audio>
+</h2>
+
+<p>
+
+I love you.
+
+Always.
+
+Forever.
+
+-Matthew
+
+</p>
+
+</div>
+
+</section>    
+
+    <!-- =========================
+         SECOND LETTER
+    ========================== -->
+
+    <section id="page2" class="hidden">
+
+        <div class="paper">
+
+            <h1>One Last Thing...</h1>
+
+            <p>
+                Before I end this letter,
+                I just want you to know how grateful I am
+                that we chose to understand each other.
+
+                Thank you for staying.
+            </p>
+
+            <button id="page2Btn">
+                Continue →
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- =========================
+         FINAL PAGE
+    ========================== -->
+
+    <section id="ending" class="hidden">
+
+        <div class="paper">
+
+            <h1>❤️</h1>
+
+            <p>
+                No matter where life takes us,
+                I hope we continue choosing honesty,
+                communication,
+                and each other.
+
+                I love you.
+
+                Always.
+            </p>
+
+            <h2>
+                — Matthew
+            </h2>
+
+        </div>
+
+    </section>
 
     <script src="script.js"></script>
 

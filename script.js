@@ -1,27 +1,12 @@
-/* =========================================
-   ELEMENTS
-========================================= */
+/* ==========================================
+   LOVE LETTER V2
+   by Matthew ❤️
+========================================== */
 
 const canvas = document.getElementById("sky");
 const ctx = canvas.getContext("2d");
 
-const music = document.getElementById("bgMusic");
-
-const message = document.getElementById("message");
-
-const continueBtn = document.getElementById("continueBtn");
-
-const heartScene = document.getElementById("heartScene");
-
-const letter = document.getElementById("letter");
-
-const letterText = document.getElementById("letterText");
-
-const nextLetter = document.getElementById("nextLetter");
-
-/* =========================================
-   CANVAS
-========================================= */
+let stars = [];
 
 function resizeCanvas(){
 
@@ -30,382 +15,258 @@ function resizeCanvas(){
 
 }
 
+window.addEventListener("resize", resizeCanvas);
 resizeCanvas();
 
-window.addEventListener("resize", resizeCanvas);
+/* ==========================
+   CREATE STARS
+========================== */
 
-/* =========================================
-   STARS
-========================================= */
+function createStars(){
 
-const stars = [];
+    stars = [];
 
-for(let i=0;i<250;i++){
+    for(let i = 0; i < 180; i++){
 
-    stars.push({
+        stars.push({
 
-        x:Math.random()*canvas.width,
+            x:Math.random()*canvas.width,
+            y:Math.random()*canvas.height,
 
-        y:Math.random()*canvas.height,
+            radius:Math.random()*2 + .5,
 
-        r:Math.random()*2,
+            alpha:Math.random(),
 
-        speed:0.15+Math.random()*0.6,
+            speed:(Math.random()*.015)+.003,
 
-        alpha:Math.random()
+            direction:Math.random()>.5?1:-1
 
-    });
+        });
+
+    }
 
 }
 
-function drawStars(){
+createStars();
+
+/* ==========================
+   DRAW
+========================== */
+
+function draw(){
 
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
-    ctx.fillStyle="#ffffff";
+    for(const star of stars){
 
-    stars.forEach(star=>{
+        star.alpha += star.speed * star.direction;
 
-        star.y+=star.speed;
+        if(star.alpha >= 1){
 
-        if(star.y>canvas.height){
-
-            star.y=0;
-
-            star.x=Math.random()*canvas.width;
+            star.direction = -1;
 
         }
 
-        ctx.globalAlpha=star.alpha;
+        if(star.alpha <= .2){
+
+            star.direction = 1;
+
+        }
 
         ctx.beginPath();
 
         ctx.arc(
-
             star.x,
-
             star.y,
-
-            star.r,
-
+            star.radius,
             0,
-
             Math.PI*2
-
         );
+
+        ctx.fillStyle = `rgba(255,255,255,${star.alpha})`;
 
         ctx.fill();
 
-    });
+    }
 
-    requestAnimationFrame(drawStars);
+    requestAnimationFrame(draw);
 
 }
 
-drawStars();
+draw();
 
-/* =========================================
-   INTRO MESSAGE
-========================================= */
+/* ==========================
+   INTRO
+========================== */
 
-const intro =
+const intro = document.getElementById("intro");
+const introBtn = document.getElementById("introBtn");
+const music = document.getElementById("music");
 
-`Hi...
+const heartPage = document.getElementById("heartPage");
+const heartBtn = document.getElementById("heartBtn");
 
-Before anything else...
+function fade(current,next){
 
-There's something I'd like you to read.
+    current.style.opacity=1;
 
-Please stay until the end.`;
+    current.style.transition=".6s";
 
-let introIndex = 0;
-
-function typeIntro(){
-
-    if(introIndex<intro.length){
-
-        message.innerHTML += intro.charAt(introIndex);
-
-        introIndex++;
-
-        setTimeout(typeIntro,55);
-
-    }
-
-    else{
-
-        continueBtn.classList.remove("hidden");
-
-    }
-
-}
-
-typeIntro();
-
-/* =========================================
-   MUSIC
-========================================= */
-
-let musicStarted=false;
-
-continueBtn.addEventListener("click",()=>{
-
-    if(!musicStarted){
-
-        music.play();
-
-        musicStarted=true;
-
-    }
-
-});
-
-/* =========================================
-   HEART SCENE
-========================================= */
-
-continueBtn.addEventListener("click", () => {
-
-    document.getElementById("scene").classList.add("hidden");
-
-    heartScene.classList.remove("hidden");
-
-    heartScene.classList.add("fadeIn");
-
-    setTimeout(() => {
-
-        heartScene.classList.add("hidden");
-
-        letter.classList.remove("hidden");
-
-        letter.classList.add("fadeIn");
-
-        startLetter();
-
-    }, 3200);
-
-});
-
-const firstLetter = `Hi...
-
-Before anything else...
-
-Thank you for taking the time to read this.
-
-I've wanted to tell you this for a long time.
-
-I don't know what your answer will be.
-
-But I didn't want to keep wondering forever.
-
-You became someone I genuinely cared about.
-
-Whether you realized it or not...
-
-You became important to me.
-
-I like you.
-
-I really do.
-
-And...
-
-I love you so much.
-
-❤️`;
-
-let letterIndex = 0;
-
-function startLetter() {
-
-    letterText.textContent = "";
-    letterIndex = 0;
-    typeLetter();
-
-}
-
-function typeLetter() {
-
-    if (letterIndex < firstLetter.length) {
-
-        letterText.textContent += firstLetter[letterIndex++];
-
-        setTimeout(typeLetter, 30);
-
-    } else {
-
-        nextLetter.classList.remove("hidden");
-
-    }
-
-}
-
-/* ===========================
-   PAGE SWITCHER
-=========================== */
-
-const page2 = document.getElementById("page2");
-const page3 = document.getElementById("page3");
-const page4 = document.getElementById("page4");
-
-function show(current, next){
-
-    current.classList.add("pageFadeOut");
+    current.style.opacity=0;
 
     setTimeout(()=>{
 
         current.classList.add("hidden");
-        current.classList.remove("pageFadeOut");
 
         next.classList.remove("hidden");
-        next.classList.add("fadeIn");
 
-    },500);
+        next.style.opacity=0;
 
-}
+        next.style.transition=".6s";
 
-nextLetter.onclick = ()=>{
+        requestAnimationFrame(()=>{
 
-    show(letter,page2);
-
-};
-
-page2Btn.onclick=()=>{
-
-    show(page2,page3);
-
-};
-
-page3Btn.onclick=()=>{
-
-    show(page3,page4);
-
-};
-
-finishBtn.onclick=()=>{
-
-    page4.innerHTML=`
-
-<div class="paper">
-
-<h1>❤️</h1>
-
-<h2>Thank You.</h2>
-
-<p>
-
-Whatever your answer is...
-
-Thank you for reading until the end.
-
-That's all I wanted.
-
-</p>
-
-</div>
-
-`;
-
-};
-
-function typeLetter(){
-
-    if(letterIndex < firstLetter.length){
-
-        letterText.innerHTML += firstLetter.charAt(letterIndex);
-
-        letterIndex++;
-
-        letter.scrollIntoView({
-
-            behavior:"smooth"
+            next.style.opacity=1;
 
         });
 
-        setTimeout(typeLetter,35);
+    },600);
+
+}
+
+introBtn.onclick=()=>{
+
+    music.play().catch(()=>{});
+
+    fade(intro,heartPage);
+
+};
+
+/* ==========================
+   LETTER
+========================== */
+
+const letterPage = document.getElementById("letterPage");
+const letterText = document.getElementById("letterText");
+const letterBtn = document.getElementById("letterBtn");
+
+const firstLetter = `My Love,
+
+If you're reading this...
+
+thank you for staying.
+
+I know we haven't had the easiest journey.
+
+We've had misunderstandings.
+
+We've overthought things.
+
+We've questioned each other.
+
+But in the end...
+
+we chose to communicate.
+
+We chose to understand each other.
+
+And because of that...
+
+I love you even more.
+
+Thank you...
+
+for every smile.
+
+every hug.
+
+every laugh.
+
+every "baby."
+
+every "bebe."
+
+every "bb."
+
+Thank you...
+
+for making ordinary days
+feel extraordinary.
+
+You became my comfort.
+
+My happiness.
+
+My favorite notification.
+
+My favorite person.
+
+I don't know what tomorrow looks like.
+
+But I know one thing.
+
+If I get to spend it with you...
+
+I'll always consider myself lucky.
+
+I love you.
+
+More than words can ever explain.
+
+❤️`;
+
+let index = 0;
+
+function typeLetter(){
+
+    if(index < firstLetter.length){
+
+        letterText.textContent += firstLetter.charAt(index);
+
+        index++;
+
+        setTimeout(typeLetter,25);
 
     }
 
     else{
 
-        nextLetter.classList.remove("hidden");
+        letterBtn.classList.remove("hidden");
 
     }
 
 }
 
-/* =========================================
-   PAGE NAVIGATION
-========================================= */
+heartBtn.onclick=()=>{
+
+    fade(heartPage,letterPage);
+
+    setTimeout(()=>{
+
+        music.volume=.4;
+
+        typeLetter();
+
+    },700);
+
+};
+
+/* ==========================
+   PAGE 2
+========================== */
 
 const page2 = document.getElementById("page2");
-const page3 = document.getElementById("page3");
-const page4 = document.getElementById("page4");
+const page2Btn = document.getElementById("page2Btn");
+const ending = document.getElementById("ending");
 
-function switchPage(current, next){
+letterBtn.onclick = () => {
 
-    current.classList.add("pageFadeOut");
+    fade(letterPage, page2);
 
-    setTimeout(()=>{
+};
 
-        current.classList.add("hidden");
-        current.classList.remove("pageFadeOut");
+page2Btn.onclick = () => {
 
-        next.classList.remove("hidden");
-        next.classList.add("fadeIn");
+    fade(page2, ending);
 
-    },500);
-
-}
-
-nextLetter.addEventListener("click",()=>{
-
-    switchPage(letter,page2);
-
-});
-
-document.getElementById("page2Btn")
-.addEventListener("click",()=>{
-
-    switchPage(page2,page3);
-
-});
-
-document.getElementById("page3Btn")
-.addEventListener("click",()=>{
-
-    switchPage(page3,page4);
-
-});
-
-document.getElementById("finishBtn")
-.addEventListener("click",()=>{
-
-    page4.classList.add("pageFadeOut");
-
-    setTimeout(()=>{
-
-        page4.innerHTML=`
-
-<div class="paper">
-
-<h2>❤️</h2>
-
-<h1>Thank you for reading.</h1>
-
-<p>
-No matter what your answer is...
-thank you for giving my feelings
-a place in your time.
-</p>
-
-</div>
-
-`;
-
-        page4.classList.remove("pageFadeOut");
-        page4.classList.add("fadeIn");
-
-    },500);
-
-});
+};
