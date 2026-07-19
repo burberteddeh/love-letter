@@ -1,236 +1,411 @@
+/* =========================================
+   ELEMENTS
+========================================= */
+
 const canvas = document.getElementById("sky");
 const ctx = canvas.getContext("2d");
+
 const music = document.getElementById("bgMusic");
-let musicStarted = false;
+
 const message = document.getElementById("message");
-const button = document.getElementById("continueBtn");
 
-function resize(){
+const continueBtn = document.getElementById("continueBtn");
 
-canvas.width=innerWidth;
+const heartScene = document.getElementById("heartScene");
 
-canvas.height=innerHeight;
+const letter = document.getElementById("letter");
 
-}
+const letterText = document.getElementById("letterText");
 
-resize();
+const nextLetter = document.getElementById("nextLetter");
 
-window.addEventListener("resize",resize);
+/* =========================================
+   CANVAS
+========================================= */
 
-const stars=[];
+function resizeCanvas(){
 
-for(let i=0;i<500;i++){
-
-stars.push({
-
-x:Math.random()*canvas.width,
-
-y:Math.random()*canvas.height,
-
-r:Math.random()*2,
-
-a:Math.random(),
-
-d:(Math.random()*0.02)+0.002
-
-});
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
 }
 
-function animate(){
+resizeCanvas();
 
-ctx.fillStyle="#020612";
+window.addEventListener("resize", resizeCanvas);
 
-ctx.fillRect(0,0,canvas.width,canvas.height);
+/* =========================================
+   STARS
+========================================= */
 
-for(const s of stars){
+const stars = [];
 
-s.a+=s.d;
+for(let i=0;i<250;i++){
 
-if(s.a>=1||s.a<=0)s.d*=-1;
+    stars.push({
 
-ctx.beginPath();
+        x:Math.random()*canvas.width,
 
-ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+        y:Math.random()*canvas.height,
 
-ctx.fillStyle=`rgba(255,255,255,${s.a})`;
+        r:Math.random()*2,
 
-ctx.fill();
+        speed:0.15+Math.random()*0.6,
 
-}
+        alpha:Math.random()
 
-requestAnimationFrame(animate);
-
-}
-
-animate();
-
-const pages=[
-
-"Hi, babyy.",
-
-"I made something for you.",
-
-"This isn't a confession.",
-
-"It's simply a thank you."
-
-];
-
-let page=0;
-
-function type(text,done){
-
-message.innerHTML="";
-
-let i=0;
-
-const timer=setInterval(()=>{
-
-message.innerHTML+=text[i];
-
-i++;
-
-if(i>=text.length){
-
-clearInterval(timer);
-
-setTimeout(done,1800);
-
-}
-
-},70);
-
-}
-
-function nextPage(){
-
-if(page>=pages.length){
-
-button.classList.remove("hidden");
-
-return;
-
-}
-
-type(pages[page],()=>{
-
-page++;
-
-nextPage();
-
-});
-
-}
-
-setTimeout(nextPage,1500);
-
-button.onclick=()=>{
-
-    music.volume = 0.5;
-
-    music.play()
-    .then(()=>{
-        musicStarted = true;
-    })
-    .catch(()=>{
-        console.log("Browser blocked autoplay");
     });
 
+}
 
-    // hide button
-    button.classList.add("hidden");
+function drawStars(){
 
+    ctx.clearRect(0,0,canvas.width,canvas.height);
 
-    // show heart
-    const heart=document.getElementById("heart");
+    ctx.fillStyle="#ffffff";
 
-    heart.classList.remove("hidden");
+    stars.forEach(star=>{
 
+        star.y+=star.speed;
 
-    // after heart animation, show letter
+        if(star.y>canvas.height){
+
+            star.y=0;
+
+            star.x=Math.random()*canvas.width;
+
+        }
+
+        ctx.globalAlpha=star.alpha;
+
+        ctx.beginPath();
+
+        ctx.arc(
+
+            star.x,
+
+            star.y,
+
+            star.r,
+
+            0,
+
+            Math.PI*2
+
+        );
+
+        ctx.fill();
+
+    });
+
+    requestAnimationFrame(drawStars);
+
+}
+
+drawStars();
+
+/* =========================================
+   INTRO MESSAGE
+========================================= */
+
+const intro =
+
+`Hi...
+
+Before anything else...
+
+There's something I'd like you to read.
+
+Please stay until the end.`;
+
+let introIndex = 0;
+
+function typeIntro(){
+
+    if(introIndex<intro.length){
+
+        message.innerHTML += intro.charAt(introIndex);
+
+        introIndex++;
+
+        setTimeout(typeIntro,55);
+
+    }
+
+    else{
+
+        continueBtn.classList.remove("hidden");
+
+    }
+
+}
+
+typeIntro();
+
+/* =========================================
+   MUSIC
+========================================= */
+
+let musicStarted=false;
+
+continueBtn.addEventListener("click",()=>{
+
+    if(!musicStarted){
+
+        music.play();
+
+        musicStarted=true;
+
+    }
+
+});
+
+/* =========================================
+   HEART SCENE
+========================================= */
+
+continueBtn.addEventListener("click", () => {
+
+    document.getElementById("scene").classList.add("hidden");
+
+    heartScene.classList.remove("hidden");
+
+    heartScene.classList.add("fadeIn");
+
+    setTimeout(() => {
+
+        heartScene.classList.add("hidden");
+
+        letter.classList.remove("hidden");
+
+        letter.classList.add("fadeIn");
+
+        startLetter();
+
+    }, 3200);
+
+});
+
+const firstLetter = `Hi...
+
+Before anything else...
+
+Thank you for taking the time to read this.
+
+I've wanted to tell you this for a long time.
+
+I don't know what your answer will be.
+
+But I didn't want to keep wondering forever.
+
+You became someone I genuinely cared about.
+
+Whether you realized it or not...
+
+You became important to me.
+
+I like you.
+
+I really do.
+
+And...
+
+I love you so much.
+
+❤️`;
+
+let letterIndex = 0;
+
+function startLetter() {
+
+    letterText.textContent = "";
+    letterIndex = 0;
+    typeLetter();
+
+}
+
+function typeLetter() {
+
+    if (letterIndex < firstLetter.length) {
+
+        letterText.textContent += firstLetter[letterIndex++];
+
+        setTimeout(typeLetter, 30);
+
+    } else {
+
+        nextLetter.classList.remove("hidden");
+
+    }
+
+}
+
+/* ===========================
+   PAGE SWITCHER
+=========================== */
+
+const page2 = document.getElementById("page2");
+const page3 = document.getElementById("page3");
+const page4 = document.getElementById("page4");
+
+function show(current, next){
+
+    current.classList.add("pageFadeOut");
+
     setTimeout(()=>{
 
-        heart.classList.add("hidden");
+        current.classList.add("hidden");
+        current.classList.remove("pageFadeOut");
 
-        message.style.opacity="0";
+        next.classList.remove("hidden");
+        next.classList.add("fadeIn");
 
-        document.getElementById("letter").classList.remove("hidden");
+    },500);
 
-        typeLetter();
+}
 
-        createHearts();
+nextLetter.onclick = ()=>{
 
-    },3000);
+    show(letter,page2);
 
 };
 
-const letterMessage = 
-`
-To my special person,
+page2Btn.onclick=()=>{
 
-I just wanted to make something that shows how much I appreciate you.
+    show(page2,page3);
 
-Thank you for the laughs, the conversations, and the memories we have created.
+};
 
-You are someone who made my days brighter just by being there.
+page3Btn.onclick=()=>{
 
-I hope you always remember how special and wonderful you are.
+    show(page3,page4);
 
-No matter what happens, I am grateful that I got to know you.
+};
 
-Thank you for being you. YOU ARE MY SPECIAL PERSON.
+finishBtn.onclick=()=>{
 
-WITH LOVE, APPRECIATION, I LOVE YOU POO 🤍 HASHSAHHA EME LANGS BA?
+    page4.innerHTML=`
+
+<div class="paper">
+
+<h1>❤️</h1>
+
+<h2>Thank You.</h2>
+
+<p>
+
+Whatever your answer is...
+
+Thank you for reading until the end.
+
+That's all I wanted.
+
+</p>
+
+</div>
+
 `;
 
+};
 
 function typeLetter(){
 
-const text=document.getElementById("letterText");
+    if(letterIndex < firstLetter.length){
 
-let i=0;
+        letterText.innerHTML += firstLetter.charAt(letterIndex);
 
-text.innerHTML="";
+        letterIndex++;
 
+        letter.scrollIntoView({
 
-let timer=setInterval(()=>{
+            behavior:"smooth"
 
-text.innerHTML+=letterMessage[i];
+        });
 
-i++;
+        setTimeout(typeLetter,35);
 
+    }
 
-if(i>=letterMessage.length){
+    else{
 
-clearInterval(timer);
+        nextLetter.classList.remove("hidden");
 
-}
-
-},50);
-
-}
-
-
-
-function createHearts(){
-
-for(let i=0;i<20;i++){
-
-let heart=document.createElement("div");
-
-heart.innerHTML="❤️";
-
-heart.className="floatingHeart";
-
-heart.style.left=Math.random()*100+"vw";
-
-heart.style.animationDelay=Math.random()*5+"s";
-
-
-document.body.appendChild(heart);
-
+    }
 
 }
 
+/* =========================================
+   PAGE NAVIGATION
+========================================= */
+
+const page2 = document.getElementById("page2");
+const page3 = document.getElementById("page3");
+const page4 = document.getElementById("page4");
+
+function switchPage(current, next){
+
+    current.classList.add("pageFadeOut");
+
+    setTimeout(()=>{
+
+        current.classList.add("hidden");
+        current.classList.remove("pageFadeOut");
+
+        next.classList.remove("hidden");
+        next.classList.add("fadeIn");
+
+    },500);
+
 }
+
+nextLetter.addEventListener("click",()=>{
+
+    switchPage(letter,page2);
+
+});
+
+document.getElementById("page2Btn")
+.addEventListener("click",()=>{
+
+    switchPage(page2,page3);
+
+});
+
+document.getElementById("page3Btn")
+.addEventListener("click",()=>{
+
+    switchPage(page3,page4);
+
+});
+
+document.getElementById("finishBtn")
+.addEventListener("click",()=>{
+
+    page4.classList.add("pageFadeOut");
+
+    setTimeout(()=>{
+
+        page4.innerHTML=`
+
+<div class="paper">
+
+<h2>❤️</h2>
+
+<h1>Thank you for reading.</h1>
+
+<p>
+No matter what your answer is...
+thank you for giving my feelings
+a place in your time.
+</p>
+
+</div>
+
+`;
+
+        page4.classList.remove("pageFadeOut");
+        page4.classList.add("fadeIn");
+
+    },500);
+
+});

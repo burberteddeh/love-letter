@@ -2,50 +2,126 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
+    <title>For Jhoanna 🤍</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>For Jhoanna 🤍</title>
-
-<link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<canvas id="sky"></canvas>
+    <!-- Stars -->
+    <canvas id="sky"></canvas>
 
-<div id="scene">
+    <!-- Intro -->
+    <section id="scene">
 
-<h1 id="message"></h1>
+        <h1 id="message"></h1>
 
-<button id="continueBtn" class="hidden">
-Continue →
-</button> 
+        <button id="continueBtn" class="hidden">
+            Continue →
+        </button>
 
-<div id="heart" class="hidden">
-    ❤️
-</div>
+    </section>
 
-<div id="letter" class="hidden">
+    <!-- Heart -->
+    <section id="heartScene" class="hidden">
+
+        <div id="heart">
+            ❤️
+        </div>
+
+    </section>
+
+    <!-- First Letter -->
+    <section id="letter" class="hidden">
+
+        <div class="paper">
+
+            <h1>For You 🤍</h1>
+
+            <p id="letterText"></p>
+
+            <button id="nextLetter" class="hidden">
+                One Last Thing...
+            </button>
+
+        </div>
+
+    </section>
+
+  <!-- Page 2 -->
+<section id="page2" class="hidden">
 
     <div class="paper">
 
-        <h1>For Crush 🤍</h1>
+        <h1>🌙 One Last Thing...</h1>
 
-        <p id="letterText"></p>
+        <p>
+            Before you answer...
+            there's something I'd like to ask.
+        </p>
+
+        <button id="page2Btn">
+            Continue →
+        </button>
 
     </div>
 
-</div>
+</section>
 
-<audio id="bgMusic" loop>
-    <source src="assets/piano.mp3" type="audio/mpeg">
-</audio>
+<!-- Page 3 -->
+<section id="page3" class="hidden">
 
-<script src="script.js"></script>
+    <div class="paper">
+
+        <h1>Just Be Honest</h1>
+
+        <p>
+            I've been carrying questions that
+            only you can answer.
+        </p>
+
+        <button id="page3Btn">
+            Continue →
+        </button>
+
+    </div>
+
+</section>
+
+<!-- Page 4 -->
+<section id="page4" class="hidden">
+
+    <div class="paper">
+
+        <h1>That's All I Need</h1>
+
+        <p>
+            If your answer is no...
+            I'll accept it.
+
+            I only wanted honesty,
+            because I care about you enough
+            to hear the truth.
+        </p>
+
+        <button id="finishBtn">
+            Thank You ❤️
+        </button>
+
+    </div>
+
+</section>
+
+    <audio id="bgMusic" loop>
+        <source src="assets/piano.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="script.js"></script>
+
 </body>
 
 </html>
