@@ -2,178 +2,82 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For You ❤️</title>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>A Story I'd Like to Write With You ❤️</title>
 
     <link rel="stylesheet" href="style.css">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Caveat:wght@500;700&display=swap"
+          rel="stylesheet">
+
 </head>
 
 <body>
 
-    <!-- Animated Star Background -->
+    <!-- Stars -->
     <canvas id="sky"></canvas>
+
+    <!-- Moon -->
+    <div id="moon"></div>
 
     <!-- Background Music -->
     <audio id="music" loop>
         <source src="assets/piano.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- =========================
-         INTRO PAGE
-    ========================== -->
+    <!-- Story -->
+    <main id="story">
 
-    <section id="intro">
+        <div class="paper" id="paper">
 
-        <div class="paper">
+            <h2 id="chapter"></h2>
 
-            <h1>Hi...</h1>
+            <h1 id="title"></h1>
 
-            <p>
-                I made something for you.
-            </p>
+            <div id="photoContainer" class="hidden">
 
-            <button id="introBtn">
-                Continue ❤️
-            </button>
+                <img id="photo"
+                     src=""
+                     alt="Memory">
 
-        </div>
+                <p id="caption"></p>
 
-    </section>
-
-    <!-- =========================
-         HEART PAGE
-    ========================== -->
-
-    <section id="heartPage" class="hidden">
-
-        <div class="paper">
-
-            <div id="heart">
-                ❤️
             </div>
 
-            <h2>
-                Every heartbeat reminds me of you.
-            </h2>
+            <div id="text"></div>
 
-            <button id="heartBtn">
-                Continue →
+            <button id="nextBtn">
+
+                Start ❤️
+
             </button>
 
         </div>
 
-    </section>
+    </main>
 
-    <!-- =========================
-         LOVE LETTER
-    ========================== -->
+    <!-- Floating Hearts -->
+    <div id="heartContainer"></div>
 
-    <section id="letterPage" class="hidden">
-
-        <div class="paper">
-
-            <h1>My Love,</h1>
-
-            <p id="letterText"></p>
-
-            <button id="letterBtn" class="hidden">
-                Continue →
-            </button>
-
-        </div>
-
-    </section>
-    
- <section id="ending" class="hidden">
-
-<div class="paper">
-
-<h1>
-
-❤️
-
-</h1>
-
-<h2>
-
-Thank You.
-
-</h2>
-
-<p>
-
-I love you.
-
-Always.
-
-Forever.
-
--Matthew
-
-</p>
-
-</div>
-
-</section>    
-
-    <!-- =========================
-         SECOND LETTER
-    ========================== -->
-
-    <section id="page2" class="hidden">
-
-        <div class="paper">
-
-            <h1>One Last Thing...</h1>
-
-            <p>
-                Before I end this letter,
-                I just want you to know how grateful I am
-                that we chose to understand each other.
-
-                Thank you for staying.
-            </p>
-
-            <button id="page2Btn">
-                Continue →
-            </button>
-
-        </div>
-
-    </section>
-
-    <!-- =========================
-         FINAL PAGE
-    ========================== -->
-
-    <section id="ending" class="hidden">
-
-        <div class="paper">
-
-            <h1>❤️</h1>
-
-            <p>
-                No matter where life takes us,
-                I hope we continue choosing honesty,
-                communication,
-                and each other.
-
-                I love you.
-
-                Always.
-            </p>
-
-            <h2>
-                — Matthew
-            </h2>
-
-        </div>
-
-    </section>
+    <!-- Sparkles -->
+    <div id="sparkleContainer"></div>
 
     <script src="script.js"></script>
 
+    <div id="moon"></div>
+    
 </body>
 
 </html>
